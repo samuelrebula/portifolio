@@ -1,77 +1,286 @@
-# React + TypeScript + Vite
+# Portfólio Profissional - Samuel Rebula
 
-This template provides a minimal setup to get React working in Vite with HMR and some ESLint rules.
+> Um portfólio moderno, responsivo e totalmente personalizável desenvolvido com React, TypeScript e Tailwind CSS.
 
-Currently, two official plugins are available:
+## Descrição do Projeto
 
-- [@vitejs/plugin-react](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react) uses [Oxc](https://oxc.rs)
-- [@vitejs/plugin-react-swc](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react-swc) uses [SWC](https://swc.rs/)
+Este é um portfólio profissional desenvolvido como parte da disciplina **Laboratório de Desenvolvimento de Software** na **PUC Minas**. O projeto apresenta minhas experiências, habilidades, projetos desenvolvidos e informações de contato em uma interface moderna e responsiva.
 
-## React Compiler
+**Características principais:**
 
-The React Compiler is enabled on this template. See [this documentation](https://react.dev/learn/react-compiler) for more information.
+- Design moderno e limpo
+- Modo escuro/claro com alternância suave
+- Totalmente responsivo (mobile, tablet, desktop)
+- Navegação suave com scroll para seções
+- Menu hambúrguer em dispositivos móveis
+- Links funcionais para redes sociais e contato
 
-Note: This will impact Vite dev & build performances.
+## Protótipos e Design
 
-## Expanding the ESLint configuration
+Os wireframes do projeto estão disponíveis localmente na pasta [public/images](public/images) e foram usados como referência para a estrutura visual e a organização das seções.
 
-If you are developing a production application, we recommend updating the configuration to enable type-aware lint rules:
+- **Wireframes**: estrutura base das seções e componentes
+- **Design System**: paleta de cores, tipografia (DM Serif Display e Inter), espaçamento
+- **Componentes**: botões, cards, formulários, ícones SVG personalizados
+- **Temas**: duas variações (claro/escuro) com transições suaves
 
-```js
-export default defineConfig([
-  globalIgnores(['dist']),
-  {
-    files: ['**/*.{ts,tsx}'],
-    extends: [
-      // Other configs...
+### Wireframes
 
-      // Remove tseslint.configs.recommended and replace with this
-      tseslint.configs.recommendedTypeChecked,
-      // Alternatively, use this for stricter rules
-      tseslint.configs.strictTypeChecked,
-      // Optionally, add this for stylistic rules
-      tseslint.configs.stylisticTypeChecked,
+#### Wireframe principal
 
-      // Other configs...
-    ],
-    languageOptions: {
-      parserOptions: {
-        project: ['./tsconfig.node.json', './tsconfig.app.json'],
-        tsconfigRootDir: import.meta.dirname,
-      },
-      // other options...
-    },
-  },
-])
+![Wireframe principal](public/images/wireframe.png)
 
-```
+#### Wireframe mobile - Hero
 
-You can also install [eslint-plugin-react-x](https://github.com/Rel1cx/eslint-react/tree/main/packages/plugins/eslint-plugin-react-x) and [eslint-plugin-react-dom](https://github.com/Rel1cx/eslint-react/tree/main/packages/plugins/eslint-plugin-react-dom) for React-specific lint rules:
+![Wireframe mobile 1](public/images/mobile-1.png)
 
-```js
-// eslint.config.js
-import reactX from 'eslint-plugin-react-x'
-import reactDom from 'eslint-plugin-react-dom'
+#### Wireframe mobile - Sobre mim
 
-export default defineConfig([
-  globalIgnores(['dist']),
-  {
-    files: ['**/*.{ts,tsx}'],
-    extends: [
-      // Other configs...
-      // Enable lint rules for React
-      reactX.configs['recommended-typescript'],
-      // Enable lint rules for React DOM
-      reactDom.configs.recommended,
-    ],
-    languageOptions: {
-      parserOptions: {
-        project: ['./tsconfig.node.json', './tsconfig.app.json'],
-        tsconfigRootDir: import.meta.dirname,
-      },
-      // other options...
-    },
-  },
-])
+![Wireframe mobile 2](public/images/mobile-2.png)
+
+#### Wireframe mobile - Experiência
+
+![Wireframe mobile 3](public/images/mobile-3.png)
+
+#### Wireframe mobile - Projetos
+
+![Wireframe mobile 4](public/images/mobile-4.png)
+
+#### Wireframe mobile - Contato
+
+![Wireframe mobile 5](public/images/mobile-5.png)
+
+## Tecnologias Utilizadas
+
+| Tecnologia            | Versão | Propósito                                             |
+| --------------------- | ------ | ----------------------------------------------------- |
+| **React**             | 19.2.8 | Framework de UI com componentes reutilizáveis e hooks |
+| **Vite**              | 8.2.1  | Build tool com dev server rápido e HMR                |
+| **TypeScript**        | ~6.0.2 | Type safety e melhor developer experience             |
+| **Tailwind CSS**      | v4     | Utility-first CSS framework para estilização          |
+| **PostCSS**           | Latest | Processamento CSS com Autoprefixer                    |
+| **React Context API** | Native | Gerenciamento de estado do tema (dark/light)          |
+
+## Estrutura do Projeto
 
 ```
+portifolio/
+├── src/
+│   ├── components/           # Componentes React reutilizáveis
+│   │   ├── Header.tsx        # Navegação com menu responsivo
+│   │   ├── Hero.tsx          # Seção principal com CTA
+│   │   ├── About.tsx         # Sobre mim com estatísticas
+│   │   ├── Experience.tsx    # Timeline de experiências profissionais
+│   │   ├── Projects.tsx      # Grid de projetos
+│   │   ├── ProjectCard.tsx   # Card individual de projeto
+│   │   ├── Contact.tsx       # Formulário de contato
+│   │   ├── Footer.tsx        # Rodapé com links sociais
+│   │   ├── Layout.tsx        # Wrapper principal
+│   │   └── SectionLabel.tsx  # Label reutilizável
+│   │
+│   ├── hooks/                # Custom React hooks
+│   │   ├── ThemeContext.ts   # Contexto do tema (tipo)
+│   │   ├── ThemeProvider.tsx # Provider do contexto
+│   │   └── useTheme.tsx      # Hook para usar o tema
+│   │
+│   ├── icons/                # Ícones SVG personalizados
+│   │   └── index.tsx         # LinkedIn, GitHub, Mail, Menu, Sun, Moon
+│   │
+│   ├── constants/            # Dados estáticos
+│   │   └── content.ts        # NAV_LINKS, EXPERIENCES, PROJECTS
+│   │
+│   ├── types/                # Tipos TypeScript
+│   │   └── index.ts          # NavLink, Experience, Project
+│   │
+│   ├── styles/               # Estilos globais
+│   │   └── globals.css       # Tailwind CSS + Google Fonts
+│   │
+│   ├── App.tsx               # Componente raiz
+│   └── main.tsx              # Ponto de entrada
+│
+├── public/                   # Assets estáticos
+├── package.json              # Dependências e scripts
+├── vite.config.ts            # Configuração do Vite
+├── tsconfig.json             # Configuração TypeScript
+├── tailwind.config.js        # Configuração Tailwind v4
+├── postcss.config.js         # Configuração PostCSS
+└── README.md                 # Este arquivo
+```
+
+## Como Usar
+
+### Pré-requisitos
+
+- Node.js >= 18.0.0
+- npm >= 11.0.0
+
+### Instalação
+
+```bash
+# Clone o repositório
+git clone https://github.com/samuelrebula/portifolio.git
+cd portifolio
+
+# Instale as dependências
+npm install
+```
+
+### Desenvolvimento
+
+```bash
+# Inicie o servidor de desenvolvimento
+npm run dev
+
+# Acesse em http://localhost:5174/
+```
+
+O servidor está configurado com:
+
+- Hot Module Replacement (HMR) - Atualização automática de componentes
+- TypeScript strict mode
+- Fast Refresh - Atualizações de estado preservadas
+
+### Build para Produção
+
+```bash
+# Gere a build otimizada
+npm run build
+
+# Visualize a build localmente
+npm run preview
+```
+
+## Seções do Portfólio
+
+### 1. **Header** (`Header.tsx`)
+
+- Navegação com links para seções
+- Menu hambúrguer responsivo (mobile)
+- Toggle de tema (dark/light mode)
+- Detecção de scroll sticky
+
+### 2. **Hero** (`Hero.tsx`)
+
+- Apresentação pessoal
+- Subtitle: "Full-Stack | Mobile"
+- Botões CTA:
+  - LinkedIn: linkedin.com/in/samuel-rebula
+  - GitHub: github.com/samuelrebula
+  - Email: rebuuula@gmail.com
+
+### 3. **About** (`About.tsx`)
+
+- Biografia profissional em português
+
+### 4. **Experience** (`Experience.tsx`)
+
+- Timeline com experiências profissionais
+- Tech stack para cada role (React Native, .NET, TypeScript, Azure, etc.)
+
+### 5. **Projects** (`Projects.tsx`)
+
+- Grid responsivo de 4 projetos
+- Cada projeto com:
+  - Imagem, nome, período
+  - Descrição e tech stack
+  - Link para GitHub
+
+### 6. **Contact** (`Contact.tsx`)
+
+- Informações de contato
+- Canais diretos: Email, LinkedIn, GitHub
+- Formulário de mensagem (validação básica)
+
+### 7. **Footer** (`Footer.tsx`)
+
+- Logo/branding
+- Links sociais
+- Copyright dinâmico
+
+## Tema e Estilos
+
+**Paleta de Cores:**
+
+| Elemento       | Claro   | Escuro  |
+| -------------- | ------- | ------- |
+| Background     | #FFFFFF | #1A1A1A |
+| Text Primary   | #111111 | #FFFFFF |
+| Text Secondary | #555555 | #AAAAAA |
+| Border         | #E2E2E0 | #333333 |
+| Accent         | #111111 | #FFFFFF |
+
+**Tipografia:**
+
+- **Display**: DM Serif Display (títulos)
+- **Body**: Inter (textos)
+
+**Responsividade:**
+
+- Mobile-first approach
+- Breakpoints: sm (640px), md (768px), lg (1024px)
+- Menu hambúrguer em telas < 768px
+
+## Sistema de Tema
+
+O tema é gerenciado via **React Context API** com 3 arquivos separados:
+
+```tsx
+// ThemeContext.ts - Definições de tipo
+export interface ThemeContextType {
+  dark: boolean;
+  toggleDark: () => void;
+}
+
+// ThemeProvider.tsx - Componente provider
+export function ThemeProvider({ children }) { ... }
+
+// useTheme.tsx - Hook customizado
+export function useTheme() { ... }
+
+// Uso em qualquer componente
+const { dark } = useTheme();
+```
+
+Esta separação permite **Fast Refresh** perfeito durante desenvolvimento.
+
+## Configurações Importantes
+
+### TypeScript (`tsconfig.json`)
+
+- `strict: true` - Type checking rigoroso
+- `verbatimModuleSyntax: true` - Import/export claros
+- `jsx: "react-jsx"` - JSX automático do React 19
+
+### Tailwind (`tailwind.config.js`)
+
+- Versão 4 com @tailwindcss/postcss
+- Custom font-display class
+- Content paths configurados
+
+### Vite (`vite.config.ts`)
+
+- React plugin com Babel compiler
+- Otimizações de build automáticas
+
+## Dados Estáticos
+
+Todos os dados (navegação, experiências, projetos) estão centralizados em `constants/content.ts`:
+
+```tsx
+export const NAV_LINKS = [...]
+export const EXPERIENCES = [...]
+export const PROJECTS = [...]
+```
+
+Fácil manutenção e atualização sem mexer em componentes.
+
+## Contato
+
+- **Email**: rebuuula@gmail.com
+- **LinkedIn**: linkedin.com/in/samuel-rebula
+- **GitHub**: github.com/samuelrebula
+
+---
+
+**Desenvolvido por Samuel Rebula**  
+Laboratório de Desenvolvimento de Software - PUC Minas
