@@ -2,9 +2,11 @@ import { useState } from "react";
 import type { Project } from "../types/index";
 import { IconGithub, IconExternalLink } from "../icons/index.tsx";
 import { useTheme } from "../hooks/useTheme.tsx";
+import { translations } from "../constants/translations";
 
 export function ProjectCard({ project }: { project: Project }) {
-  const { dark } = useTheme();
+  const { dark, language } = useTheme();
+  const t = translations[language];
   const [hovered, setHovered] = useState(false);
   const cardBg = dark
     ? "bg-[#222222] border-[#333]"
@@ -58,19 +60,13 @@ export function ProjectCard({ project }: { project: Project }) {
               href={project.github}
               className={`flex-shrink-0 flex items-center gap-1 text-xs border rounded px-2 py-1 transition-colors ${ghBtn}`}
               aria-label={
-                project.linkType === "published"
-                  ? "Projeto publicado"
-                  : "GitHub"
+                project.linkType === "published" ? t.publishedLabel : "GitHub"
               }
               target="_blank"
               rel="noreferrer"
             >
-              {project.linkType === "published" ? (
-                <IconExternalLink size={12} />
-              ) : (
-                <IconGithub size={12} />
-              )}
-              {project.linkType === "published" ? "Publicado" : "GitHub"}
+              {project.linkType !== "published" && <IconGithub size={12} />}
+              {project.linkType === "published" ? t.published : "GitHub"}
               <IconExternalLink size={11} />
             </a>
           )}
@@ -78,11 +74,11 @@ export function ProjectCard({ project }: { project: Project }) {
         <p className={`text-xs mb-3 ${per}`}>{project.period}</p>
         {project.availability && (
           <p className={`text-xs leading-snug mb-3 ${per}`}>
-            {project.availability}
+            {language === "pt" ? project.availability : project.availabilityEn}
           </p>
         )}
         <p className={`text-sm leading-relaxed mb-4 ${desc}`}>
-          {project.description}
+          {language === "pt" ? project.description : project.descriptionEn}
         </p>
         <div className="flex flex-wrap gap-1.5">
           {project.techs.map((tech) => (

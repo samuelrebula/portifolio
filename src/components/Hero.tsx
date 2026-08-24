@@ -1,8 +1,10 @@
 import { IconLinkedIn, IconGithub, IconMail } from "../icons/index.tsx";
 import { useTheme } from "../hooks/useTheme.tsx";
+import { translations } from "../constants/translations";
 
 export function Hero() {
-  const { dark } = useTheme();
+  const { dark, language } = useTheme();
+  const t = translations[language];
   const muted = dark ? "text-[#888888]" : "text-[#888888]";
   const sub = dark ? "text-[#AAAAAA]" : "text-[#555555]";
   const heading = dark ? "text-white" : "text-[#111111]";
@@ -34,7 +36,7 @@ export function Hero() {
         <h1
           className={`font-display text-5xl md:text-7xl leading-[1.08] tracking-tight mb-5 ${heading}`}
         >
-          Olá, sou
+          {t.hero.greeting}
           <br />
           <span className="italic">Samuel Rebula</span>
         </h1>
@@ -42,16 +44,11 @@ export function Hero() {
         <p
           className={`text-lg md:text-xl font-light mb-5 tracking-wide ${muted}`}
         >
-          Software Developer
+          {t.hero.role}
         </p>
 
         <p className={`text-base max-w-xl leading-relaxed mb-10 ${sub}`}>
-          Desenvolvimento full-stack de aplicações robustas e escaláveis com
-          foco em arquitetura limpa, boas práticas de engenharia e soluções
-          inovadoras. Experiência em React, React Native, .NET, Azure e CI/CD.
-          Gosto de resolver problemas complexos, explorar novas tecnologias e
-          utilizar IA, agentes e automação para tornar o desenvolvimento mais
-          eficiente.
+          {t.hero.description}
         </p>
 
         <div className="flex flex-wrap items-center gap-3">
@@ -87,7 +84,7 @@ export function Hero() {
                 : "border-[#C8C8C6] text-[#555555] hover:bg-[#F0F0EE]"
             }`}
           >
-            <IconMail size={16} /> Contato
+            <IconMail size={16} /> {t.hero.contact}
           </a>
         </div>
       </div>

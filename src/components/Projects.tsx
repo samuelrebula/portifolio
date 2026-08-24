@@ -3,9 +3,11 @@ import { ProjectCard } from "./ProjectCard";
 import { SectionLabel } from "./SectionLabel";
 import { IconExternalLink } from "../icons/index.tsx";
 import { useTheme } from "../hooks/useTheme.tsx";
+import { translations } from "../constants/translations";
 
 export function Projects() {
-  const { dark } = useTheme();
+  const { dark, language } = useTheme();
+  const t = translations[language];
   const heading = dark ? "text-white" : "text-[#111111]";
   const link = dark
     ? "text-[#AAAAAA] hover:text-white"
@@ -21,13 +23,13 @@ export function Projects() {
       <div className="max-w-5xl mx-auto">
         <div className="flex items-end justify-between mb-12">
           <div>
-            <SectionLabel>Projetos</SectionLabel>
+            <SectionLabel>{t.projects.label}</SectionLabel>
             <h2
               className={`font-display text-4xl md:text-5xl leading-tight ${heading}`}
             >
-              Trabalhos
+              {t.projects.title[0]}
               <br />
-              <span className="italic">selecionados</span>
+              <span className="italic">{t.projects.title[1]}</span>
             </h2>
           </div>
           <a
@@ -36,7 +38,7 @@ export function Projects() {
             rel="noopener noreferrer"
             className={`hidden md:inline-flex items-center gap-1.5 text-sm transition-colors ${link}`}
           >
-            Ver todos projetos no GitHub <IconExternalLink size={13} />
+            {t.projects.github} <IconExternalLink size={13} />
           </a>
         </div>
         <div className="grid sm:grid-cols-2 gap-6">

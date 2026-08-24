@@ -2,9 +2,11 @@ import { useState, useEffect } from "react";
 import { NAV_LINKS } from "../constants/content";
 import { IconSun, IconMoon, IconMenu, IconXClose } from "../icons/index.tsx";
 import { useTheme } from "../hooks/useTheme.tsx";
+import { translations } from "../constants/translations";
 
 export function Header() {
-  const { dark, toggleDark } = useTheme();
+  const { dark, language, toggleDark, toggleLanguage } = useTheme();
+  const t = translations[language];
   const [menuOpen, setMenuOpen] = useState(false);
   const [scrolled, setScrolled] = useState(false);
 
@@ -45,9 +47,20 @@ export function Header() {
                   : "text-[#555555] hover:text-[#111111]"
               }`}
             >
-              {link.label}
+              {t.nav[link.href.slice(1) as keyof typeof t.nav]}
             </a>
           ))}
+          <button
+            onClick={toggleLanguage}
+            aria-label={t.languageLabel}
+            className={`w-8 h-8 text-xs font-medium flex items-center justify-center rounded-md border transition-colors duration-200 ${
+              dark
+                ? "border-[#444] text-[#AAAAAA] hover:text-white hover:border-[#666]"
+                : "border-[#E2E2E0] text-[#777] hover:text-[#111111] hover:border-[#BBBBB]"
+            }`}
+          >
+            {t.languageButton}
+          </button>
           <button
             onClick={toggleDark}
             aria-label={dark ? "Modo claro" : "Modo escuro"}
@@ -63,6 +76,17 @@ export function Header() {
 
         {/* Mobile right side */}
         <div className="md:hidden flex items-center gap-3">
+          <button
+            onClick={toggleLanguage}
+            aria-label={t.languageLabel}
+            className={`w-8 h-8 text-xs font-medium flex items-center justify-center rounded-md border transition-colors ${
+              dark
+                ? "border-[#444] text-[#AAAAAA] hover:text-white hover:border-[#666]"
+                : "border-[#E2E2E0] text-[#777] hover:text-[#111111] hover:border-[#BBBBB]"
+            }`}
+          >
+            {t.languageButton}
+          </button>
           <button
             onClick={toggleDark}
             aria-label={dark ? "Modo claro" : "Modo escuro"}
@@ -103,7 +127,7 @@ export function Header() {
                   : "text-[#444444] border-[#F0F0EE]"
               }`}
             >
-              {link.label}
+              {t.nav[link.href.slice(1) as keyof typeof t.nav]}
             </a>
           ))}
         </div>

@@ -1,8 +1,10 @@
 import { IconLinkedIn, IconGithub, IconMail } from "../icons/index.tsx";
 import { useTheme } from "../hooks/useTheme.tsx";
+import { translations } from "../constants/translations";
 
 export function Footer() {
-  const { dark } = useTheme();
+  const { dark, language } = useTheme();
+  const t = translations[language];
 
   return (
     <footer
@@ -58,8 +60,7 @@ export function Footer() {
           ))}
         </div>
         <p className={`text-xs ${dark ? "text-[#555]" : "text-[#AAAAAA]"}`}>
-          © {new Date().getFullYear()} Samuel Rebula. Todos os direitos
-          reservados.
+          © {new Date().getFullYear()} Samuel Rebula. {t.footer}
         </p>
       </div>
     </footer>

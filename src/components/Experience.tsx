@@ -1,9 +1,11 @@
 import { EXPERIENCES } from "../constants/content";
 import { SectionLabel } from "./SectionLabel";
 import { useTheme } from "../hooks/useTheme.tsx";
+import { translations } from "../constants/translations";
 
 export function Experience() {
-  const { dark } = useTheme();
+  const { dark, language } = useTheme();
+  const t = translations[language];
   const heading = dark ? "text-white" : "text-[#111111]";
   const role = dark ? "text-[#EEEEEE]" : "text-[#111111]";
   const company = dark ? "text-[#666666]" : "text-[#888888]";
@@ -25,13 +27,13 @@ export function Experience() {
       }`}
     >
       <div className="max-w-5xl mx-auto">
-        <SectionLabel>Experiências</SectionLabel>
+        <SectionLabel>{t.experience.label}</SectionLabel>
         <h2
           className={`font-display text-4xl md:text-5xl mb-14 leading-tight ${heading}`}
         >
-          Trajetória
+          {t.experience.title[0]}
           <br />
-          <span className="italic">profissional</span>
+          <span className="italic">{t.experience.title[1]}</span>
         </h2>
 
         {/* Timeline */}
@@ -70,7 +72,7 @@ export function Experience() {
                   <span className={`text-xs ${company}`}>{exp.company}</span>
                 </div>
                 <p className={`text-sm leading-relaxed mb-4 ${desc}`}>
-                  {exp.description}
+                  {language === "pt" ? exp.description : exp.descriptionEn}
                 </p>
                 <div className="flex flex-wrap gap-2">
                   {exp.techs.map((tech) => (

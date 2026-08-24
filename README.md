@@ -10,6 +10,7 @@ Este é um portfólio profissional desenvolvido como parte da disciplina **Labor
 
 - Design moderno e limpo
 - Modo escuro/claro com alternância suave
+- Alternância de idioma entre português e inglês
 - Totalmente responsivo (mobile, tablet, desktop)
 - Navegação suave com scroll para seções
 - Menu hambúrguer em dispositivos móveis
@@ -17,7 +18,7 @@ Este é um portfólio profissional desenvolvido como parte da disciplina **Labor
 
 ## Protótipos e Design
 
-Os wireframes do projeto estão disponíveis localmente na pasta [public/images](public/images) e foram usados como referência para a estrutura visual e a organização das seções.
+Os wireframes do projeto estão disponíveis localmente na pasta [public/images](public/images) e foram usados como referência para a estrutura visual e a organização das seções. As imagens e vídeos dos projetos ficam em [public/images/ref](public/images/ref).
 
 - **Wireframes**: estrutura base das seções e componentes
 - **Design System**: paleta de cores, tipografia (DM Serif Display e Inter), espaçamento
@@ -79,15 +80,16 @@ portifolio/
 │   │   └── SectionLabel.tsx  # Label reutilizável
 │   │
 │   ├── hooks/                # Custom React hooks
-│   │   ├── ThemeContext.ts   # Contexto do tema (tipo)
+│   │   ├── ThemeContext.ts   # Contexto de tema e idioma
 │   │   ├── ThemeProvider.tsx # Provider do contexto
 │   │   └── useTheme.tsx      # Hook para usar o tema
 │   │
 │   ├── icons/                # Ícones SVG personalizados
 │   │   └── index.tsx         # LinkedIn, GitHub, Mail, Menu, Sun, Moon
 │   │
-│   ├── constants/            # Dados estáticos
-│   │   └── content.ts        # NAV_LINKS, EXPERIENCES, PROJECTS
+│   ├── constants/            # Dados e traduções
+│   │   ├── content.ts        # NAV_LINKS, EXPERIENCES, PROJECTS
+│   │   └── translations.ts   # Textos em português e inglês
 │   │
 │   ├── types/                # Tipos TypeScript
 │   │   └── index.ts          # NavLink, Experience, Project
@@ -170,7 +172,7 @@ npm run preview
 
 ### 3. **About** (`About.tsx`)
 
-- Biografia profissional em português
+- Biografia profissional em português e inglês
 
 ### 4. **Experience** (`Experience.tsx`)
 
@@ -179,17 +181,17 @@ npm run preview
 
 ### 5. **Projects** (`Projects.tsx`)
 
-- Grid responsivo de 4 projetos
+- Grid responsivo de projetos
 - Cada projeto com:
-  - Imagem, nome, período
+  - Imagem ou vídeo em loop, nome e período
   - Descrição e tech stack
-  - Link para GitHub
+  - Link para GitHub ou projeto publicado
 
 ### 6. **Contact** (`Contact.tsx`)
 
 - Informações de contato
 - Canais diretos: Email, LinkedIn, GitHub
-- Formulário de mensagem (validação básica)
+- Formulário de mensagem com validação básica e abertura do cliente de e-mail via `mailto:`
 
 ### 7. **Footer** (`Footer.tsx`)
 
@@ -220,15 +222,17 @@ npm run preview
 - Breakpoints: sm (640px), md (768px), lg (1024px)
 - Menu hambúrguer em telas < 768px
 
-## Sistema de Tema
+## Tema e Idioma
 
-O tema é gerenciado via **React Context API** com 3 arquivos separados:
+O tema e o idioma são gerenciados via **React Context API**:
 
 ```tsx
 // ThemeContext.ts - Definições de tipo
 export interface ThemeContextType {
   dark: boolean;
   toggleDark: () => void;
+  language: "pt" | "en";
+  toggleLanguage: () => void;
 }
 
 // ThemeProvider.tsx - Componente provider
@@ -238,7 +242,7 @@ export function ThemeProvider({ children }) { ... }
 export function useTheme() { ... }
 
 // Uso em qualquer componente
-const { dark } = useTheme();
+const { dark, language, toggleLanguage } = useTheme();
 ```
 
 Esta separação permite **Fast Refresh** perfeito durante desenvolvimento.
@@ -262,14 +266,15 @@ Esta separação permite **Fast Refresh** perfeito durante desenvolvimento.
 - React plugin com Babel compiler
 - Otimizações de build automáticas
 
-## Dados Estáticos
+## Dados e Traduções
 
-Todos os dados (navegação, experiências, projetos) estão centralizados em `constants/content.ts`:
+Os dados de navegação, experiências e projetos ficam em `constants/content.ts`. Os textos da interface ficam centralizados em `constants/translations.ts`:
 
 ```tsx
 export const NAV_LINKS = [...]
 export const EXPERIENCES = [...]
 export const PROJECTS = [...]
+export const translations = { pt: {...}, en: {...} }
 ```
 
 Fácil manutenção e atualização sem mexer em componentes.

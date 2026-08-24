@@ -2,9 +2,11 @@ import { useState } from "react";
 import { SectionLabel } from "./SectionLabel";
 import { IconMail, IconLinkedIn, IconGithub } from "../icons/index.tsx";
 import { useTheme } from "../hooks/useTheme.tsx";
+import { translations } from "../constants/translations";
 
 export function Contact() {
-  const { dark } = useTheme();
+  const { dark, language } = useTheme();
+  const t = translations[language];
   const [form, setForm] = useState({ name: "", email: "", message: "" });
   const [emailOpened, setEmailOpened] = useState(false);
 
@@ -30,18 +32,16 @@ export function Contact() {
     >
       <div className="max-w-5xl mx-auto grid md:grid-cols-2 gap-16 items-start">
         <div>
-          <SectionLabel>Contato</SectionLabel>
+          <SectionLabel>{t.contact.label}</SectionLabel>
           <h2
             className={`font-display text-4xl md:text-5xl mb-5 leading-tight ${heading}`}
           >
-            Vamos criar
+            {t.contact.title[0]}
             <br />
-            <span className="italic">algo juntos?</span>
+            <span className="italic">{t.contact.title[1]}</span>
           </h2>
           <p className={`text-[15px] leading-relaxed mb-10 max-w-sm ${sub}`}>
-            Estou aberto a colaborações técnicas, ou uma conversa sobre
-            engenharia de software e tecnologia. Respondo mensagens assim que
-            possível.
+            {t.contact.description}
           </p>
           <div className="space-y-4">
             {[
@@ -93,18 +93,16 @@ export function Contact() {
               }`}
             >
               <p className={`font-display text-2xl mb-2 ${heading}`}>
-                E-mail preparado!
+                {t.contact.ready}
               </p>
-              <p className={`text-sm ${sub}`}>
-                Seu aplicativo de e-mail foi aberto com a mensagem preenchida.
-              </p>
+              <p className={`text-sm ${sub}`}>{t.contact.readyDescription}</p>
             </div>
           ) : (
             <form
               onSubmit={(e) => {
                 e.preventDefault();
-                const subject = `Contato pelo portfólio: ${form.name}`;
-                const body = `Nome: ${form.name}\nE-mail: ${form.email}\n\n${form.message}`;
+                const subject = `${t.contact.subject}: ${form.name}`;
+                const body = `${t.contact.bodyName}: ${form.name}\nE-mail: ${form.email}\n\n${form.message}`;
                 window.location.href = `mailto:rebuuula@gmail.com?subject=${encodeURIComponent(subject)}&body=${encodeURIComponent(body)}`;
                 setEmailOpened(true);
               }}
@@ -113,15 +111,15 @@ export function Contact() {
               {[
                 {
                   id: "name",
-                  label: "Nome",
+                  label: t.contact.name,
                   type: "text",
-                  placeholder: "Seu nome completo",
+                  placeholder: t.contact.namePlaceholder,
                 },
                 {
                   id: "email",
                   label: "E-mail",
                   type: "email",
-                  placeholder: "seu@email.com",
+                  placeholder: t.contact.emailPlaceholder,
                 },
               ].map((field) => (
                 <div key={field.id}>
@@ -148,12 +146,12 @@ export function Contact() {
               ))}
               <div>
                 <label className={`block text-sm font-medium mb-2 ${labelCls}`}>
-                  Mensagem
+                  {t.contact.message}
                 </label>
                 <textarea
                   id="message"
                   rows={5}
-                  placeholder="Conte-me sobre o seu projeto ou oportunidade..."
+                  placeholder={t.contact.messagePlaceholder}
                   value={form.message}
                   onChange={(e) =>
                     setForm((f) => ({ ...f, message: e.target.value }))
@@ -170,7 +168,7 @@ export function Contact() {
                     : "bg-[#111111] text-white hover:bg-[#222222]"
                 }`}
               >
-                Enviar mensagem
+                {t.contact.send}
               </button>
             </form>
           )}
