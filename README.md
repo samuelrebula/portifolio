@@ -162,7 +162,7 @@ npm run preview
 ### 2. **Hero** (`Hero.tsx`)
 
 - Apresentação pessoal
-- Subtitle: "Full-Stack | Mobile"
+- Subtitle: "Software Developer"
 - Botões CTA:
   - LinkedIn: linkedin.com/in/samuel-rebula
   - GitHub: github.com/samuelrebula

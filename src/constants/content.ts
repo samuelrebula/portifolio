@@ -37,35 +37,46 @@ export const EXPERIENCES = [
 
 export const PROJECTS = [
   {
-    image: "",
-    name: "",
-    period: "",
-    description: "",
-    techs: [],
-    github: "",
+    image: "/images/ref/adi.png",
+    name: "ADI Global Mobile App",
+    period: "Mar 2024 – Presente",
+    description:
+      "Aplicação mobile B2B desenvolvida para a ADI Global, com funcionalidades voltadas à operação e à experiência dos usuários. Atuação no desenvolvimento full-stack, integração com APIs, sincronização de dados, performance e evolução contínua do produto para Android e iOS.",
+    techs: ["React Native", "TypeScript", ".NET", "C#", "Azure"],
+    github: "https://github.com/samuelrebula",
+    linkType: "none",
+    availability:
+      "Disponível para download na App Store e Play Store para o mercado dos Estados Unidos (US).",
   },
   {
-    image: "",
-    name: "",
-    period: "",
-    description: "",
-    techs: [],
-    github: "",
+    video: "/images/ref/daily.mp4",
+    name: "Daily",
+    period: "2026",
+    description:
+      "Aplicação web para acompanhamento de hábitos e metas pessoais. O usuário define um objetivo em dias e registra sua evolução diariamente, enquanto o sistema salva o progresso e evita registros duplicados no mesmo dia.",
+    techs: ["Next.js", "TypeScript", "Prisma", "PostgreSQL", "Tailwind CSS 4"],
+    github: "https://daily-self.vercel.app/",
+    linkType: "published",
   },
   {
-    image: "",
-    name: "",
-    period: "",
-    description: "",
-    techs: [],
-    github: "",
+    video: "/images/ref/esp.mp4",
+    name: "ESP Guitars",
+    period: "2025",
+    description:
+      "Site desenvolvido como estudo de interface e homenagem ao guitarrista Alexi Laiho. A aplicação apresenta modelos de guitarras, informações sobre o artista e uma navegação inspirada na identidade visual da ESP Guitars.",
+    techs: ["React", "JavaScript", "CSS", "Vercel"],
+    github: "https://espguitars.vercel.app/",
+    linkType: "published",
   },
   {
-    image: "",
-    name: "",
-    period: "",
-    description: "",
-    techs: [],
-    github: "",
+    video: "/images/ref/jam.mp4",
+    name: "JAM",
+    period: "2025",
+    description:
+      "Sistema de gestão para estúdios musicais que centraliza o agendamento de sessões, o controle de equipamentos e o gerenciamento financeiro. A plataforma ajuda a organizar reservas, pagamentos e recursos, melhorando a comunicação entre estúdios, músicos e produtores.",
+    techs: ["Java", "Spring Boot", "React", "Vite", "PostgreSQL"],
+    github:
+      "https://github.com/ICEI-PUC-Minas-PPLES-TI/plf-es-2025-2-ti2-1381100-JAM",
+    linkType: "none",
   },
 ];

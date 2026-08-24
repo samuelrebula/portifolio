@@ -26,28 +26,61 @@ export function ProjectCard({ project }: { project: Project }) {
       onMouseLeave={() => setHovered(false)}
     >
       <div className="relative h-48 overflow-hidden bg-[#E8E8E6]">
-        <img
-          src={project.image}
-          alt={project.name}
-          className={`w-full h-full object-cover transition-transform duration-500 ${
-            hovered ? "scale-105" : "scale-100"
-          }`}
-        />
+        {project.video ? (
+          <video
+            src={project.video}
+            className={`w-full h-full object-cover transition-transform duration-500 ${
+              hovered ? "scale-105" : "scale-100"
+            }`}
+            autoPlay
+            muted
+            loop
+            playsInline
+            aria-label={project.name}
+          />
+        ) : project.image ? (
+          <img
+            src={project.image}
+            alt={project.name}
+            className={`w-full h-full object-cover transition-transform duration-500 ${
+              hovered ? "scale-105" : "scale-100"
+            }`}
+          />
+        ) : null}
       </div>
       <div className="p-5">
         <div className="flex items-start justify-between gap-3 mb-2">
           <h3 className={`font-semibold text-sm leading-snug ${name}`}>
             {project.name}
           </h3>
-          <a
-            href={project.github}
-            className={`flex-shrink-0 flex items-center gap-1 text-xs border rounded px-2 py-1 transition-colors ${ghBtn}`}
-            aria-label="GitHub"
-          >
-            <IconGithub size={12} /> GitHub <IconExternalLink size={11} />
-          </a>
+          {project.linkType !== "none" && (
+            <a
+              href={project.github}
+              className={`flex-shrink-0 flex items-center gap-1 text-xs border rounded px-2 py-1 transition-colors ${ghBtn}`}
+              aria-label={
+                project.linkType === "published"
+                  ? "Projeto publicado"
+                  : "GitHub"
+              }
+              target="_blank"
+              rel="noreferrer"
+            >
+              {project.linkType === "published" ? (
+                <IconExternalLink size={12} />
+              ) : (
+                <IconGithub size={12} />
+              )}
+              {project.linkType === "published" ? "Publicado" : "GitHub"}
+              <IconExternalLink size={11} />
+            </a>
+          )}
         </div>
         <p className={`text-xs mb-3 ${per}`}>{project.period}</p>
+        {project.availability && (
+          <p className={`text-xs leading-snug mb-3 ${per}`}>
+            {project.availability}
+          </p>
+        )}
         <p className={`text-sm leading-relaxed mb-4 ${desc}`}>
           {project.description}
         </p>

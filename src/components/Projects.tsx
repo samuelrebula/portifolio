@@ -32,14 +32,26 @@ export function Projects() {
           </div>
           <a
             href="https://github.com/samuelrebula"
+            target="_blank"
+            rel="noopener noreferrer"
             className={`hidden md:inline-flex items-center gap-1.5 text-sm transition-colors ${link}`}
           >
-            Ver todos <IconExternalLink size={13} />
+            Ver todos projetos no GitHub <IconExternalLink size={13} />
           </a>
         </div>
         <div className="grid sm:grid-cols-2 gap-6">
           {PROJECTS.map((project, i) => (
-            <ProjectCard key={i} project={project} />
+            <ProjectCard
+              key={i}
+              project={{
+                ...project,
+                linkType: project.linkType as
+                  | "none"
+                  | "published"
+                  | "github"
+                  | undefined,
+              }}
+            />
           ))}
         </div>
       </div>

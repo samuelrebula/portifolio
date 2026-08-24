@@ -40,6 +40,12 @@ export function Footer() {
             <a
               key={item.label}
               href={item.href}
+              target={item.href.startsWith("mailto") ? undefined : "_blank"}
+              rel={
+                item.href.startsWith("mailto")
+                  ? undefined
+                  : "noopener noreferrer"
+              }
               aria-label={item.label}
               className={`transition-colors ${
                 dark

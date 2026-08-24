@@ -6,7 +6,7 @@ import { useTheme } from "../hooks/useTheme.tsx";
 export function Contact() {
   const { dark } = useTheme();
   const [form, setForm] = useState({ name: "", email: "", message: "" });
-  const [sent, setSent] = useState(false);
+  const [emailOpened, setEmailOpened] = useState(false);
 
   const heading = dark ? "text-white" : "text-[#111111]";
   const sub = dark ? "text-[#AAAAAA]" : "text-[#555555]";
@@ -84,7 +84,7 @@ export function Contact() {
         </div>
 
         <div>
-          {sent ? (
+          {emailOpened ? (
             <div
               className={`border rounded-md p-8 text-center ${
                 dark
@@ -93,17 +93,20 @@ export function Contact() {
               }`}
             >
               <p className={`font-display text-2xl mb-2 ${heading}`}>
-                Mensagem enviada!
+                E-mail preparado!
               </p>
               <p className={`text-sm ${sub}`}>
-                Obrigado pelo contato. Responderei em breve.
+                Seu aplicativo de e-mail foi aberto com a mensagem preenchida.
               </p>
             </div>
           ) : (
             <form
               onSubmit={(e) => {
                 e.preventDefault();
-                setSent(true);
+                const subject = `Contato pelo portfólio: ${form.name}`;
+                const body = `Nome: ${form.name}\nE-mail: ${form.email}\n\n${form.message}`;
+                window.location.href = `mailto:rebuuula@gmail.com?subject=${encodeURIComponent(subject)}&body=${encodeURIComponent(body)}`;
+                setEmailOpened(true);
               }}
               className="space-y-4"
             >

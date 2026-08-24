@@ -12,10 +12,13 @@ export interface Experience {
 }
 
 export interface Project {
-  image: string;
+  image?: string;
+  video?: string;
   name: string;
   period: string;
   description: string;
   techs: string[];
   github: string;
+  linkType?: "github" | "published" | "none";
+  availability?: string;
 }
