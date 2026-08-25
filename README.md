@@ -2,6 +2,8 @@
 
 > Um portfólio moderno, responsivo e totalmente personalizável desenvolvido com React, TypeScript e Tailwind CSS.
 
+> Link: https://portifolio-rebula.onrender.com/
+
 ## Descrição do Projeto
 
 Este é um portfólio profissional desenvolvido como parte da disciplina **Laboratório de Desenvolvimento de Software** na **PUC Minas**. O projeto apresenta minhas experiências, habilidades, projetos desenvolvidos e informações de contato em uma interface moderna e responsiva.
