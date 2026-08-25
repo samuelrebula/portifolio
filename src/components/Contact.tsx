@@ -1,4 +1,5 @@
 import { useState } from "react";
+import emailjs from "@emailjs/browser";
 import { SectionLabel } from "./SectionLabel";
 import { IconMail, IconLinkedIn, IconGithub } from "../icons/index.tsx";
 import { useTheme } from "../hooks/useTheme.tsx";
@@ -9,6 +10,7 @@ export function Contact() {
   const t = translations[language];
   const [form, setForm] = useState({ name: "", email: "", message: "" });
   const [emailOpened, setEmailOpened] = useState(false);
+  const [loading, setLoading] = useState(false);
 
   const heading = dark ? "text-white" : "text-[#111111]";
   const sub = dark ? "text-[#AAAAAA]" : "text-[#555555]";
@@ -22,6 +24,33 @@ export function Contact() {
   const inputCls = dark
     ? "border-[#333] bg-[#222] text-white placeholder:text-[#555] focus:border-[#777] focus:ring-[#777]"
     : "border-[#E2E2E0] bg-[#F9F9F7] text-[#111] placeholder:text-[#BBBBBB] focus:border-[#888] focus:ring-[#888]";
+
+  const handleSubmit = async (e: React.SubmitEvent) => {
+    e.preventDefault();
+    setLoading(true);
+
+    const serviceID = import.meta.env.VITE_YOUR_SERVICE_ID;
+    const templateID = import.meta.env.VITE_YOUR_TEMPLATE_ID;
+    const publicKey = import.meta.env.VITE_YOUR_PUBLIC_KEY;
+
+    const templateParams = {
+      from_name: form.name,
+      from_email: form.email,
+      message: form.message,
+    };
+
+    try {
+      await emailjs.send(serviceID, templateID, templateParams, publicKey);
+      setEmailOpened(true);
+    } catch (error) {
+      console.error("Erro ao enviar e-mail:", error);
+      alert(
+        "Ocorreu um erro ao enviar a mensagem. Tente novamente mais tarde.",
+      );
+    } finally {
+      setLoading(false);
+    }
+  };
 
   return (
     <section
@@ -98,16 +127,7 @@ export function Contact() {
               <p className={`text-sm ${sub}`}>{t.contact.readyDescription}</p>
             </div>
           ) : (
-            <form
-              onSubmit={(e) => {
-                e.preventDefault();
-                const subject = `${t.contact.subject}: ${form.name}`;
-                const body = `${t.contact.bodyName}: ${form.name}\nE-mail: ${form.email}\n\n${form.message}`;
-                window.location.href = `mailto:rebuuula@gmail.com?subject=${encodeURIComponent(subject)}&body=${encodeURIComponent(body)}`;
-                setEmailOpened(true);
-              }}
-              className="space-y-4"
-            >
+            <form onSubmit={handleSubmit} className="space-y-4">
               {[
                 {
                   id: "name",
@@ -162,13 +182,14 @@ export function Contact() {
               </div>
               <button
                 type="submit"
-                className={`w-full py-3 text-sm font-medium rounded-md transition-colors ${
+                disabled={loading}
+                className={`w-full py-3 text-sm font-medium rounded-md transition-colors disabled:opacity-50 ${
                   dark
                     ? "bg-white text-[#111] hover:bg-[#E8E8E6]"
                     : "bg-[#111111] text-white hover:bg-[#222222]"
                 }`}
               >
-                {t.contact.send}
+                {loading ? "Enviando..." : t.contact.send}
               </button>
             </form>
           )}
